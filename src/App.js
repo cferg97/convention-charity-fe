@@ -2,11 +2,40 @@ import { Button, Container, Form, Image } from "react-bootstrap";
 import { useState } from "react";
 
 function App() {
+  const [itemName, setItemName] = useState("");
+  const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
+
+  const onImageSelect = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const postData = async () => {
+    try{
+      
+
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("itemName", itemName);
+    formData.append("itemDesc", description);
+    formData.append("submitterName", name);
+    formData.append("image", image);
+  };
+
   return (
     <Container
       fluid
       style={{ display: "flex", flexDirection: "column" }}
-      className="text-center align-items-center"
+      className="text-center align-items-center pt-2"
     >
       <img
         className="img-fluid my-2 mx-2 logo-main"
@@ -21,6 +50,9 @@ function App() {
           <Form.Group className="mb-3">
             <Form.Label>Item Name</Form.Label>
             <Form.Control
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+              required
               type="text"
               placeholder="What's the name of your item?"
             />
@@ -28,6 +60,9 @@ function App() {
           <Form.Group className="mb-3">
             <Form.Label>Item Description</Form.Label>
             <Form.Control
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
               as="textarea"
               rows="3"
               placeholder="Write a short description of what your item is/what materials were used to make it"
@@ -36,6 +71,9 @@ function App() {
           <Form.Group className="mb-3">
             <Form.Label>What's your name?</Form.Label>
             <Form.Control
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
               type="text"
               placeholder="Who would you like to be credited as?"
             />
@@ -43,7 +81,17 @@ function App() {
 
           <Form.Group className="mb-3">
             <Form.Label>Upload image of item </Form.Label>
-            <Form.Control type="file" accept="image/*" capture="environment" />
+            <br />
+            <Form.Control
+              onChange={(e) => onImageSelect(e)}
+              required
+              type="file"
+              accept="image/*"
+              capture="environment"
+            />
+            <Form.Text className="text-white">
+              If you're on mobile, this will open the camera app!
+            </Form.Text>
           </Form.Group>
 
           <Button>Submit!</Button>
