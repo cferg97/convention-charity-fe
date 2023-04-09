@@ -6,20 +6,30 @@ function App() {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
+  const [loading, setIsLoading] = useState(false);
 
   const onImageSelect = (e) => {
     setImage(e.target.files[0]);
   };
 
-  const postData = async () => {
-    try{
-      
-
+  const postData = async (form) => {
+    try {
+      setIsLoading(true);
+      let response = await fetch(
+        "https://convention-charity-be-production.up.railway.app/submit",
+        {
+          method: "POST",
+          body: JSON.stringify(form),
+          "Content-Type": "application/json",
+        }
+      );
+      if (response.ok) {
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
     }
-    catch(err){
-      console.log(err)
-    }
-  }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +39,8 @@ function App() {
     formData.append("itemDesc", description);
     formData.append("submitterName", name);
     formData.append("image", image);
+
+    postData(formData);
   };
 
   return (
@@ -46,10 +58,15 @@ function App() {
       <h2>Charity Auction Submission</h2>
 
       <Container fluid style={{ alignContent: "center" }}>
-        <Form className="mx-auto" style={{ maxWidth: "35rem" }}>
+        <Form
+          className="mx-auto"
+          style={{ maxWidth: "35rem" }}
+          onSubmit={(e) => onSubmit(e)}
+        >
           <Form.Group className="mb-3">
             <Form.Label>Item Name</Form.Label>
             <Form.Control
+              disabled={loading}
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
               required
@@ -60,6 +77,7 @@ function App() {
           <Form.Group className="mb-3">
             <Form.Label>Item Description</Form.Label>
             <Form.Control
+              disabled={loading}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
@@ -71,6 +89,7 @@ function App() {
           <Form.Group className="mb-3">
             <Form.Label>What's your name?</Form.Label>
             <Form.Control
+              disabled={loading}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -83,6 +102,7 @@ function App() {
             <Form.Label>Upload image of item </Form.Label>
             <br />
             <Form.Control
+              disabled={loading}
               onChange={(e) => onImageSelect(e)}
               required
               type="file"
@@ -94,7 +114,7 @@ function App() {
             </Form.Text>
           </Form.Group>
 
-          <Button>Submit!</Button>
+          <Button type="submit">Submit!</Button>
         </Form>
       </Container>
     </Container>
