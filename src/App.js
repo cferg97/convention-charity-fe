@@ -19,14 +19,15 @@ function App() {
         "https://convention-charity-be-production.up.railway.app/submit",
         {
           method: "POST",
-          body: JSON.stringify(form),
-          "Content-Type": "application/json",
+          body: form,
+          "Content-Type": "undefined",
         }
       );
       if (response.ok) {
         setIsLoading(false);
       }
     } catch (err) {
+      alert(err);
       console.log(err);
     }
   };
