@@ -7,6 +7,7 @@ function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const onImageSelect = (e) => {
     setImage(e.target.files[0]);
@@ -25,6 +26,7 @@ function App() {
       );
       if (response.ok) {
         setIsLoading(false);
+        setSuccess(true);
       }
     } catch (err) {
       alert(err);
@@ -58,66 +60,73 @@ function App() {
       />
       <h2>Charity Auction Submission</h2>
 
-      <Container fluid style={{ alignContent: "center" }}>
-        <Form
-          className="mx-auto"
-          style={{ maxWidth: "35rem" }}
-          onSubmit={(e) => onSubmit(e)}
-        >
-          <Form.Group className="mb-3">
-            <Form.Label>Item Name</Form.Label>
-            <Form.Control
-              disabled={loading}
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-              required
-              type="text"
-              placeholder="What's the name of your item?"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Item Description</Form.Label>
-            <Form.Control
-              disabled={loading}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              as="textarea"
-              rows="3"
-              placeholder="Write a short description of what your item is/what materials were used to make it"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>What's your name?</Form.Label>
-            <Form.Control
-              disabled={loading}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              type="text"
-              placeholder="Who would you like to be credited as?"
-            />
-          </Form.Group>
+      {success === false && (
+        <Container fluid style={{ alignContent: "center" }}>
+          <Form
+            className="mx-auto"
+            style={{ maxWidth: "35rem" }}
+            onSubmit={(e) => onSubmit(e)}
+          >
+            <Form.Group className="mb-3">
+              <Form.Label>Item Name</Form.Label>
+              <Form.Control
+                disabled={loading}
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+                required
+                type="text"
+                placeholder="What's the name of your item?"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Item Description</Form.Label>
+              <Form.Control
+                disabled={loading}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                as="textarea"
+                rows="3"
+                placeholder="Write a short description of what your item is/what materials were used to make it"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>What's your name?</Form.Label>
+              <Form.Control
+                disabled={loading}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                type="text"
+                placeholder="Who would you like to be credited as?"
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Upload image of item </Form.Label>
-            <br />
-            <Form.Control
-              disabled={loading}
-              onChange={(e) => onImageSelect(e)}
-              required
-              type="file"
-              accept="image/*"
-              capture="environment"
-            />
-            <Form.Text className="text-white">
-              If you're on mobile, this will open the camera app!
-            </Form.Text>
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Upload image of item </Form.Label>
+              <br />
+              <Form.Control
+                disabled={loading}
+                onChange={(e) => onImageSelect(e)}
+                required
+                type="file"
+                accept="image/*"
+                capture="environment"
+              />
+              <Form.Text className="text-white">
+                If you're on mobile, this will open the camera app!
+              </Form.Text>
+            </Form.Group>
 
-          <Button type="submit">Submit!</Button>
-        </Form>
-      </Container>
+            <Button type="submit">Submit!</Button>
+          </Form>
+        </Container>
+      )}
+      {success === true && (
+        <Container className="text-center">
+          <h1>Thank you for your submission!</h1>
+        </Container>
+      )}
     </Container>
   );
 }
