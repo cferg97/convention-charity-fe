@@ -1,4 +1,4 @@
-import { Button, Container, Form, Image } from "react-bootstrap";
+import { Button, Container, Form, Image, Spinner } from "react-bootstrap";
 import { useState } from "react";
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
         src="https://res.cloudinary.com/cfcloudstorage/image/upload/v1681043028/griffish/eventbrite_lkakmp.png"
         alt="Griffish Isles Logo"
       />
-      <h2>Charity Auction Submission</h2>
+      <h2>Charity Auction Item Submission</h2>
 
       {success === false && (
         <Container fluid style={{ alignContent: "center" }}>
@@ -118,13 +118,15 @@ function App() {
               </Form.Text>
             </Form.Group>
 
-            <Button type="submit">Submit!</Button>
+            {loading && <Spinner animation="border" />}
+            {!loading && <Button type="submit">Submit!</Button>}
           </Form>
         </Container>
       )}
       {success === true && (
         <Container className="text-center">
-          <h1>Thank you for your submission!</h1>
+          <h1>Thank you for your submission, {name}!</h1>
+
         </Container>
       )}
     </Container>
