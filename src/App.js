@@ -126,6 +126,14 @@ function App() {
       {success === true && (
         <Container className="text-center mt-4">
           <h1>Thank you for your submission, {name}!</h1>
+
+          <Button
+            onClick={() => window.location.reload()}
+            className="mt-3"
+            variant="primary"
+          >
+            New Submission
+          </Button>
         </Container>
       )}
       <footer
