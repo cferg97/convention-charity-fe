@@ -55,7 +55,7 @@ function App() {
       <img
         className="img-fluid my-2 mx-2 logo-main"
         style={{ borderRadius: "5px" }}
-        src="https://res.cloudinary.com/cfcloudstorage/image/upload/v1681043028/griffish/eventbrite_lkakmp.png"
+        src="https://res.cloudinary.com/cfcloudstorage/image/upload/v1682801530/griffish/for%20website/eventbrite_omhake.png"
         alt="Griffish Isles Logo"
       />
       <h2>Charity Auction Item Submission</h2>
@@ -124,7 +124,7 @@ function App() {
         </Container>
       )}
       {success === true && (
-        <Container className="text-center">
+        <Container className="text-center mt-4">
           <h1>Thank you for your submission, {name}!</h1>
 
         </Container>
