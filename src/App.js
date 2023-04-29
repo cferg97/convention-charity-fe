@@ -136,7 +136,7 @@ function App() {
         }}
         className="mt-4 text-center"
       >
-        Made by Katie/enjoypizza/SketchyPon3 :)
+        <p>Made by Katie/enjoypizza/SketchyPon3 :)</p>
       </footer>
     </Container>
   );
