@@ -126,9 +126,18 @@ function App() {
       {success === true && (
         <Container className="text-center mt-4">
           <h1>Thank you for your submission, {name}!</h1>
-
         </Container>
       )}
+      <footer
+        style={{
+          height: "2rem",
+          width: "100%",
+          backgroundColor: "rgba (0,0,0,0.4)",
+        }}
+        className="mt-4 text-center"
+      >
+        Made by Katie/enjoypizza/SketchyPon3 :)
+      </footer>
     </Container>
   );
 }
